@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="utf-8">
+	<title>StageSelect</title>
+	<link rel="stylesheet" href="css/style.css">
+	<style type="text/css">
+	#canvas{
+		width: 800px;
+		height: 600px;
+		border: 1px solid gray;
+		background-image: url("background/background-fire.jpg");
+	}
+	#StageSelect{
+		position: relative;
+		top: 100px;
+		left: 220px;
+		font-size: 50px;
+		color: #ffffff;
+	}
+	#Stage1{
+		position: relative;
+		top: 250px;
+		left: 270px;
+		font-size: 50px;
+		color: #ff0000;
+	}
+	#Stage2{
+		position: relative;
+		top: 300px;
+		left: 270px;
+		font-size: 50px;
+		color: #ff000000;
+	}
+	#Stage3{
+		position: relative;
+		top: 350px;
+		left: 270px;
+		font-size: 50px;
+		color: #ff000000;
+	}
+	</style>
+</head>
+<body>
+		<div id="canvas">
+					<div id="StageSelect">ステージセレクト</div>
+					<div id="Stage1">ステージ１</div>
+					<div id="Stage2">ステージ２</div>
+					<div id="Stage3">ステージ３</div>
+		</div>
+<script src="js/jquery.min.js"></script>
+<script>
+var count=0;	//ステージ数
+var st1 = document.getElementById("Stage1");//ステージ１文字
+var st2 = document.getElementById("Stage2");//ステージ２文字
+var st3 = document.getElementById("Stage3");//ステージ３文字
+var canvas = document.getElementById("canvas");//キャンバス
+document.addEventListener("keydown", KeyDownFunc);
+
+//ステージの透過度
+function update() {
+	if(count==0){
+	 //canvas.style.backgroundImage = "url(background/background-dia.jpg)";
+	 st1.style.color = "#ff0000ff";
+	 st2.style.color = "#ff0000aa";
+	 st3.style.color = "#ff0000aa";
+ }
+ else if(count==1){
+	//canvas.style.backgroundImage = "url(background/background-hielo.jpg)";
+	st1.style.color = "#ff0000aa";
+	st2.style.color = "#ff0000ff";
+	st3.style.color = "#ff0000aa";
+ }
+ else if(count==2){
+ //canvas.style.backgroundImage = "url(background/background-cave.jpg)";
+ st1.style.color = "#ff0000aa";
+ st2.style.color = "#ff0000aa";
+ st3.style.color = "#ff0000ff";
+ }
+
+ if(count>=3)
+ count=0;
+ else if(count<=-1)
+ count=2;
+}
+setInterval('update()',1);
+
+//キー選択
+function KeyDownFunc(e){
+	if(e.keyCode==40){
+	count+=1;
+}
+else if(e.keyCode==38){
+	count-=1;
+	}
+else if(e.keyCode==13 || e.keyCode==32){
+	switch (count) {
+		case 0:
+			jump1();
+		break;
+		case 1:
+		  jump2();
+		break;
+		case 2:
+		  jump3();
+		break;
+	}
+	}
+}
+
+//シーン偏移
+function jump1(){
+  //if (confirm("Stage1へ")==true)
+    location.href = "STetris_title.html";
+}
+function jump2(){
+  //if (confirm("Stage2へ")==true)
+    location.href = "STetris_title.html";
+}
+function jump3(){
+  //if (confirm("Stage3へ")==true)
+    location.href = "STetris_title.html";
+}
+</script>
+<form>
+<!-- input type="button" name="link" value="Stage1" onclick="jump1()">
+<input type="button" name="link" value="Stage2" onclick="jump2()">
+<input type="button" name="link" value="Stage3" onclick="jump3()" -->
+</form>
+</body>
+</html>
