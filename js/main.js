@@ -64,7 +64,6 @@ var Initialize = function () {
 
 var Update = function () {
     this.stage.Update();
-    timer++;
     //enemy.Update();
     // HTMLの更新
     info.innerHTML = mouse.x + ' : ' + mouse.y;
