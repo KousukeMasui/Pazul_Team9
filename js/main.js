@@ -32,9 +32,7 @@ var Initialize = function () {
     // canvas2dコンテキストを取得
     ctx = screenCanvas.getContext('2d');
 
-    this.stage = new Stage(ctx, 10, 10, "res/Background.png",  new Vector2(800, 600));
-
-    this.stage.CreateBlock();
+    this.stage = new Stage(ctx, 10, 10, "res/Background.png","res/food.png",  new Vector2(800, 600));
 }
 
 var Update = function () {
