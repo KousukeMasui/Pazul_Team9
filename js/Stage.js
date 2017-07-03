@@ -140,6 +140,7 @@ Stage.prototype.Update = function ()
     if (this.fallBlockArray.length == 0) return;
     for (var i = 0; i < this.fallBlockArray.length; i++)
         this.fallBlockArray[i].Update();
+    //自動落下処理
     var isFall = this.fallBlockArray[0].IsFall();
     if (isFall) {
         for (var i = 1; i < this.fallBlockArray.length; i++) {
@@ -178,6 +179,11 @@ Stage.prototype.FallFunc = function () {
             if (this.stageArray[x][y] == 2 && !this.IsFall(new Vector2(x, y)))//・ｽ・ｽ・ｽ・ｽ・ｽu・ｽ・ｽ・ｽb・ｽN・ｽﾌ場合
             {
                 this.stageArray[x][y] = 1;
+                for (var i = 0; i < this.fallBlockArray.length; i++)
+                {
+                    this.fallBlockArray[i].fallTimer = 0.0;
+                    this.fallBlockArray[i].SetPos(this.fallBlockArray[i].arrayPos);
+                }
                 //・ｽ・ｽ・ｽ~・ｽu・ｽ・ｽ・ｽb・ｽN・ｽﾉ登・ｽ^
                 this.blockArray = this.blockArray.concat(this.fallBlockArray);
                 isFall = true;
@@ -194,11 +200,11 @@ Stage.prototype.FallFunc = function () {
             for (var y = 0; y < this.stageSize.y; y++)
                 if (this.stageArray[x][y] == 2) this.stageArray[x][y] = 1;
         }
-        //・ｽ・ｽ・ｽ・ｽ・ｽu・ｽ・ｽ・ｽb・ｽN・ｽN・ｽ・ｽ・ｽA
+        //落下ブロックを空に
         this.fallBlockArray.length = 0;
-        //・ｽ・ｽ・ｽ・ｽ・ｽ・ｽ・ｽ・ｽ
+        //行の削除関数
         this.Delete();
-        //・ｽ・ｽ・ｽ・ｽ・ｽu・ｽ・ｽ・ｽb・ｽN・ｽ・ｽ・ｽﾈゑｿｽ・ｽﾈゑｿｽ・ｽ・ｽ・ｽ逅ｶ・ｽ・ｽ
+        //落下ブロックが無くなったら新しくブロックを生成
         if(this.fallBlockArray.length <=0) this.CreateBlock();
     }
 }
@@ -302,13 +308,13 @@ Stage.prototype.Draw = function () {
         this.fallBlockArray[i].Draw();
     for (var i = 0; i < this.blockArray.length; i++)
         this.blockArray[i].Draw();
-    for (var x = 0; x < this.stageSize.x; x++)
-    {
-        for(var y=0;y<this.stageSize.y;y++)
-        {
-            drawText(this.ctx, "#000000", this.blockScale.x, "MS P・ｽS・ｽV・ｽb・ｽN", x * this.blockScale.x, (y + 1) * this.blockScale.y, this.stageArray[x][y]);
-        }
-    }
+    //for (var x = 0; x < this.stageSize.x; x++)
+    //{
+    //    for(var y=0;y<this.stageSize.y;y++)
+    //    {
+    //        drawText(this.ctx, "#000000", this.blockScale.x, "MS P・ｽS・ｽV・ｽb・ｽN", x * this.blockScale.x, (y + 1) * this.blockScale.y, this.stageArray[x][y]);
+    //    }
+    //}
 }
 Stage.prototype.MoveBlocks = function(blockArray,moveVec)
 {

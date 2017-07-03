@@ -38,8 +38,16 @@ var Initialize = function () {
     data = unescape(data);
     //受け渡し用にstring型にする
     data = String(data);
+    //string型を受け取り、,で分割する
+    var arr = "";
+    arr += data;
+    arr = arr.split(",");
+
+    //数値に変換して取得
+    var s = parseInt(arr[0], 10);
+    alert(s);
     var bgSrc ="res/", blSrc="res/";
-    switch(data)
+    switch (s)
     {
         case 1:
             bgSrc += "background-cave.jpg";
