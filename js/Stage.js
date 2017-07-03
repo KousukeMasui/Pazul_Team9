@@ -18,13 +18,14 @@ var Stage = function (ctx, x, y, backImageSrc,blockImageSrc,screenSize) {
     document.addEventListener('keydown', KeyDown, true);
     //csvを読み込む 読み込みが終わるまで待機
     g_isPouse = true;
-    this.csv = new CSV_Data(" ");
-    this.createBlocks = new Array();
+    //this.csv = new CSV_Data(" ");
+    //this.createBlocks = new Array();
     //new CSVReader("./src/tetrimino_patarn.csv", function (csv) {
     //    this.stage.csv = csv;
     //    this.stage.BlockSave();
     //    this.stage.CreateBlock();//ブロック生成
     //    g_isPouse = false;//ポーズ解除
+    //    alert(this.stage.csv.data);
     //},this.csv);
 
     this.CreateBlock();
@@ -42,12 +43,12 @@ Stage.prototype.BlockSave = function () {
     alert(this.csv.row);
     for (var row = 0; row < this.csv.row - 1; row++)
     {
+        if ((row+1) % 8 == 0) { alert("add"); cnt++; }
         //alert("row = " + row + " : " + this.csv.data[row]);
         for (var col = 0; col < this.csv.col; col++) {
-            alert("row = " + row + "col = " + col + " : " + this.csv.data[row][col]);
+            alert("row = " + row + ",col = " + col + " : " + this.csv.data[row][col]);
             this.createBlocks[cnt][row][col] = this.csv.data[row][col];
         }
-        //if (row % 7 == 0) cnt++;
     }
 
 }
@@ -84,7 +85,7 @@ Stage.prototype.AddBlock = function(position,isCenter)
 Stage.prototype.CreateBlock = function () {
     //ランダム生成 0~2
     //var rand = Math.floor(Math.random() * 3);
-    //
+    
     //for (var x = 0; x < 7; x++)
     //{
     //    for(var y=0;y<7;y++)
