@@ -25,8 +25,10 @@ var Stage = function (ctx, x, y, backImageSrc,blockImageSrc,screenSize) {
         this.stage.BlockSave();
         this.stage.CreateBlock();//ブロック生成
         g_isPouse = false;//ポーズ解除
-        alert(this.stage.csv.data);
-    },this.csv);
+    }, this.csv);
+
+    //タイマ
+    this.timer = 0;
 
     //this.CreateBlock();
 }
@@ -39,8 +41,7 @@ Stage.prototype.BlockSave = function () {
         for (var j = 0; j < 7; j++)
             this.createBlocks[i][j] = new Array(7);
     }
-    var cnt = 0;//this.createBlocks.length;
-    //alert(this.csv.row);
+    var cnt = 0;
     for (var row = 0; row < this.csv.row - 1; row++)
     {
         if ((row+1) % 8 == 0) cnt++;
@@ -83,36 +84,58 @@ Stage.prototype.AddBlock = function(position,isCenter)
 Stage.prototype.CreateBlock = function () {
     //ランダム生成 0~2
     var rand = Math.floor(Math.random() * 3);
-    
+    var up = 10;//一番上のブロックの位置
     for (var x = 0; x < 7; x++)
     {
         for(var y=0;y<7;y++)
         {
             if(this.createBlocks[rand][x][y] == 1)
             {
+                if (up >= y) up = y;
                 this.AddBlock(new Vector2(x, y), (x == 3 && y == 3));
             }
         }
     }
+    //横幅 /2
+    var centerPos = this.stageSize.x / 2 - 3;
+
+    for (var i = 0; i < this.fallBlockArray.length; i++)
+    {
+        if (!this.IsToBlock(new Vector2(this.fallBlockArray[i].arrayPos.x + centerPos, this.fallBlockArray[i].arrayPos.y - up)))
+        {
+            run = false;
+            this.MoveBlocks(this.fallBlockArray, new Vector2(centerPos, -up));
+            /*ここにゲームオーバーシーン開始を入れる*/
+            //ゲームオーバー文字を追加
+            gameOverImage = new Image("res/GameOver_Logo.png");
+            //シーンチェンジ
+            location.href = "./result.html?" + escape(this.timer);
+            return;
+        }
+    }
+    this.MoveBlocks(this.fallBlockArray, new Vector2(centerPos, -up));
+    //this.MoveBlocks(this.fallBlockArray, new Vector2(0, -up));
 
     //this.AddBlock(new Vector2(3, 3), true);
     //for (var i = 0; i < 3;i++)
     //    this.AddBlock(new Vector2(3+i, 4), true);
 
-    if (this.IsGameOver())
-    {
-        run = false;
-        /*ここにゲームオーバーシーン開始を入れる*/
-        //ゲームオーバー文字を追加
-        gameOverImage = new Image("res/GameOver_Logo.png");
-    }
+    //if (this.IsGameOver())
+    //{
+    //    run = false;
+    //    /*ここにゲームオーバーシーン開始を入れる*/
+    //    //ゲームオーバー文字を追加
+    //    gameOverImage = new Image("res/GameOver_Logo.png");
+    //    //シーンチェンジ
+    //    location.href = "./result.html?" + escape(this.timer);
+    //}
 
     player.SetBlock(this.fallBlockArray);
 }
 
 Stage.prototype.Update = function ()
 {
-    //alert(this.csv.Get(1, 0));
+    this.timer++;
     this.FallFunc();
     if (this.fallBlockArray.length == 0) return;
     for (var i = 0; i < this.fallBlockArray.length; i++)
@@ -133,7 +156,6 @@ Stage.prototype.IsGameOver = function () {
         //・ｽ・ｽ・ｽ・ｽ・ｽﾊ置・ｽﾉ奇ｿｽ・ｽﾉブ・ｽ・ｽ・ｽb・ｽN・ｽ・ｽ・ｽ・ｽ・ｽ・ｽ・ｽ鼾・
         if(this.stageArray[this.fallBlockArray[i].arrayPos.x][this.fallBlockArray[i].arrayPos.y] == 1)
         {
-            location.href = "./result.html?";
             return true;
         }
     }

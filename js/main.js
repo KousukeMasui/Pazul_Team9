@@ -12,7 +12,6 @@ var fps = 1000 / 30;
 var mouse = new Vector2(0,0);
 var ctx; // canvas2d コンテキスト格納用
 var gameOverImage;//ゲームオーバー文字
-
 //初期化
 var Initialize = function () {
     // canvasの取得
@@ -32,12 +31,40 @@ var Initialize = function () {
 
     // canvas2dコンテキストを取得
     ctx = screenCanvas.getContext('2d');
+    //ステージを元に画像を変更する
+    //?以降の文字を取得する
+    var data = location.search.substring(1, location.search.length);
+    //エスケープされた文字をアンエスケープする
+    data = unescape(data);
+    //受け渡し用にstring型にする
+    data = String(data);
+    var bgSrc ="res/", blSrc="res/";
+    switch(data)
+    {
+        case 1:
+            bgSrc += "background-cave.jpg";
+            blSrc += "dia/dia.png";
+            break;
+        case 2:
+            bgSrc += "background-dia.jpg";
+            blSrc += "diamond/diamond.png";
+            break;
+        case 3:
+            bgSrc += "background-hielo.jpg";
+            blSrc += "hielo/iconhielo.png";
+            break;
+        default:
+            bgSrc += "Background.png";
+            blSrc += "food.png";
+            break;
+    }
 
-    this.stage = new Stage(ctx, 10, 10, "res/Background.png","res/food.png",  new Vector2(800, 600));
+    this.stage = new Stage(ctx, 10, 10, bgSrc, blSrc, new Vector2(800, 600));
 }
 
 var Update = function () {
     this.stage.Update();
+    timer++;
     //enemy.Update();
     // HTMLの更新
     info.innerHTML = mouse.x + ' : ' + mouse.y;
