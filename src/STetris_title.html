@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="utf-8">
+	<title>Title</title>
+	<link rel="stylesheet" href="css/style.css">
+	<style type="text/css">
+/*文字の点滅*/
+@-webkit-keyframes pulse {
+ from {
+   opacity: 1.0;/*透明度100%*/
+ }
+ to {
+   opacity: 0.5;/*透明度80%*/
+ }
+}
+.blinking{
+-webkit-animation-name: pulse;/* 実行する名前 */
+-webkit-animation-duration: 0.3s;/* 0.3秒かけて実行 */
+-webkit-animation-iteration-count:infinite;/* 何回実行するか。infiniteで無限 */
+-webkit-animation-timing-function:ease-in-out;/* イーズインアウト */
+-webkit-animation-direction: alternate;/* alternateにするとアニメーションが反復 */
+-webkit-animation-delay: 0s; /* 実行までの待ち時間 */
+}
+/*文字の点滅*/
+
+/*各ＩＤのスタイル*/
+	#canvas{
+		width: 800px;
+		height: 600px;
+		border: 1px solid gray;
+		background-image: url("background/background-fire.jpg");
+	}
+	#Title{
+		position: relative;
+		top: 100px;
+		left: 200px;
+		font-size: 50px;
+		color: #ffffff;
+	}
+	#PressKey{
+		position: relative;
+		top: 350px;
+		left: 220px;
+		font-size: 50px;
+		color: #ff0000;
+	}
+	</style>
+</head>
+<body onload="init();">
+	<div id="canvas">
+	<div id="Title">
+		サバイバルテトリス
+	</div>
+	 <div id="PressKey" class="blinking">
+		 Press Space Key
+</div>
+</div>
+<script src="js/jquery.min.js"></script>
+<script>
+var keycount =0;
+//var sts = document.getElementById("StageSelect");
+document.addEventListener("keydown", jump);
+
+function update() {
+	//sts.style.color = "#ff0000ff";
+}
+setInterval('update()',2);
+
+function jump(e){
+	if(e.keyCode==32){
+	keycount+=1;
+	if(keycount>=1){
+    location.href = "STetris_stageselect.html";
+	}
+}
+}
+</script>
+</body>
+</html>
