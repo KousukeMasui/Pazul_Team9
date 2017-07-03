@@ -11,6 +11,7 @@ var run = true;
 var fps = 1000 / 30;
 var mouse = new Vector2(0,0);
 var ctx; // canvas2d コンテキスト格納用
+var gameOverImage;//ゲームオーバー文字
 
 //初期化
 var Initialize = function () {
@@ -55,12 +56,16 @@ window.onload = function(){
 
 	// メインループ
     (function () {
+
         Update();
-        
+        if (!run) {
+            alert("game_over");
+            ctx.drawImage(gameOverImage, screenCanvas.width / 2 - 200, screenCanvas.height);
+        }
         Draw();
 		// 再帰呼び出しによりループを実現
 		// argument.callee => 自身の関数を参照できる
-		if(run){setTimeout(arguments.callee, fps);}
+        if (run) { setTimeout(arguments.callee, fps); }
 	})();
 };
 

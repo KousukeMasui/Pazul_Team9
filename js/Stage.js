@@ -18,17 +18,17 @@ var Stage = function (ctx, x, y, backImageSrc,blockImageSrc,screenSize) {
     document.addEventListener('keydown', KeyDown, true);
     //csvを読み込む 読み込みが終わるまで待機
     g_isPouse = true;
-    //this.csv = new CSV_Data(" ");
-    //this.createBlocks = new Array();
-    //new CSVReader("./src/tetrimino_patarn.csv", function (csv) {
-    //    this.stage.csv = csv;
-    //    this.stage.BlockSave();
-    //    this.stage.CreateBlock();//ブロック生成
-    //    g_isPouse = false;//ポーズ解除
-    //    alert(this.stage.csv.data);
-    //},this.csv);
+    this.csv = new CSV_Data(" ");
+    this.createBlocks = new Array();
+    new CSVReader("./src/tetrimino_patarn.csv", function (csv) {
+        this.stage.csv = csv;
+        this.stage.BlockSave();
+        this.stage.CreateBlock();//ブロック生成
+        g_isPouse = false;//ポーズ解除
+        alert(this.stage.csv.data);
+    },this.csv);
 
-    this.CreateBlock();
+    //this.CreateBlock();
 }
 
 Stage.prototype.BlockSave = function () {
@@ -40,14 +40,12 @@ Stage.prototype.BlockSave = function () {
             this.createBlocks[i][j] = new Array(7);
     }
     var cnt = 0;//this.createBlocks.length;
-    alert(this.csv.row);
+    //alert(this.csv.row);
     for (var row = 0; row < this.csv.row - 1; row++)
     {
-        if ((row+1) % 8 == 0) { alert("add"); cnt++; }
-        //alert("row = " + row + " : " + this.csv.data[row]);
+        if ((row+1) % 8 == 0) cnt++;
         for (var col = 0; col < this.csv.col; col++) {
-            alert("row = " + row + ",col = " + col + " : " + this.csv.data[row][col]);
-            this.createBlocks[cnt][row][col] = this.csv.data[row][col];
+            this.createBlocks[cnt][row%7][col] = this.csv.data[row][col];
         }
     }
 
@@ -84,27 +82,29 @@ Stage.prototype.AddBlock = function(position,isCenter)
 
 Stage.prototype.CreateBlock = function () {
     //ランダム生成 0~2
-    //var rand = Math.floor(Math.random() * 3);
+    var rand = Math.floor(Math.random() * 3);
     
-    //for (var x = 0; x < 7; x++)
-    //{
-    //    for(var y=0;y<7;y++)
-    //    {
-    //        if(this.createBlocks[rand][x][y] == 1)
-    //        {
-    //            this.AddBlock(new Vector2(x, y), (x == 3 && y == 3));
-    //        }
-    //    }
-    //}
+    for (var x = 0; x < 7; x++)
+    {
+        for(var y=0;y<7;y++)
+        {
+            if(this.createBlocks[rand][x][y] == 1)
+            {
+                this.AddBlock(new Vector2(x, y), (x == 3 && y == 3));
+            }
+        }
+    }
 
-    this.AddBlock(new Vector2(3, 3), true);
-    for (var i = 0; i < 3;i++)
-        this.AddBlock(new Vector2(3+i, 4), true);
+    //this.AddBlock(new Vector2(3, 3), true);
+    //for (var i = 0; i < 3;i++)
+    //    this.AddBlock(new Vector2(3+i, 4), true);
 
     if (this.IsGameOver())
     {
         run = false;
         /*ここにゲームオーバーシーン開始を入れる*/
+        //ゲームオーバー文字を追加
+        gameOverImage = new Image("res/GameOver_Logo.png");
     }
 
     player.SetBlock(this.fallBlockArray);
