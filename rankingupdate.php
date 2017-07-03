@@ -67,9 +67,9 @@
 
 $(document).ready(function()
 {
-	alert("stop");
+	alert("ランキングの保存が完了しました");
 	//シーン移行
-	location.href = "./result.html";
+	location.href = "./src/STetris_title.html";
 
 	//遷移時のデータ受け取り
 	function DataReceive(){

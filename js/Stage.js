@@ -1,30 +1,30 @@
-//ƒOƒ[ƒoƒ‹’è‹`
+//ï¿½Oï¿½ï¿½ï¿½[ï¿½oï¿½ï¿½ï¿½ï¿½ï¿½`
 var player;
-//Class’è‹`
+//Classï¿½ï¿½ï¿½`
 var Stage = function (ctx, x, y, backImageSrc,blockImageSrc,screenSize) {
     this.ctx = ctx;
-    //”wŒi‰æ‘œ
+    //ï¿½wï¿½iï¿½æ‘œ
     this.bgImg = new Image();
     this.bgImg.src = backImageSrc;
-    //ƒXƒNƒŠ[ƒ“ƒTƒCƒY
+    //ï¿½Xï¿½Nï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Tï¿½Cï¿½Y
     this.screenSize = screenSize;
     this.stageSize = new Vector2(x, y);
     this.Initialize(x, y);
-    //ƒuƒƒbƒN‚Ì‰æ‘œ
+    //ï¿½uï¿½ï¿½ï¿½bï¿½Nï¿½Ì‰æ‘œ
     this.blockImageSrc = blockImageSrc;
-    //ƒvƒŒƒCƒ„[‚Ì¶¬
+    //ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½Ìï¿½ï¿½ï¿½
     player = new Player(this);
-    // ƒL[“ü—Í‚Ìæ“¾‚ğƒCƒxƒ“ƒg‚Æ‚µ‚Ä“o˜^
+    // ï¿½Lï¿½[ï¿½ï¿½ï¿½Í‚Ìæ“¾ï¿½ï¿½ï¿½Cï¿½xï¿½ï¿½ï¿½gï¿½Æ‚ï¿½ï¿½Ä“oï¿½^
     document.addEventListener('keydown', KeyDown, true);
-    //csv‚ğ“Ç‚İ‚Ş “Ç‚İ‚İ‚ªI‚í‚é‚Ü‚Å‘Ò‹@
+    //csvï¿½ï¿½ï¿½Ç‚İï¿½ï¿½ï¿½ ï¿½Ç‚İï¿½ï¿½İ‚ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½Ü‚Å‘Ò‹@
     g_isPouse = true;
     //this.csv = new CSV_Data(" ");
     //this.createBlocks = new Array();
     //new CSVReader("./src/tetrimino_patarn.csv", function (csv) {
     //    this.stage.csv = csv;
     //    this.stage.BlockSave();
-    //    this.stage.CreateBlock();//ƒuƒƒbƒN¶¬
-    //    g_isPouse = false;//ƒ|[ƒY‰ğœ
+    //    this.stage.CreateBlock();//ï¿½uï¿½ï¿½ï¿½bï¿½Nï¿½ï¿½ï¿½ï¿½
+    //    g_isPouse = false;//ï¿½|ï¿½[ï¿½Yï¿½ï¿½ï¿½ï¿½
     //    alert(this.stage.csv.data);
     //},this.csv);
 
@@ -61,9 +61,9 @@ Stage.prototype.Initialize = function (x, y) {
         for (var j = 0; j < y; j++)
             this.stageArray[i][j] = 0;
     }
-    //—‰ºƒuƒƒbƒN
+    //ï¿½ï¿½ï¿½ï¿½ï¿½uï¿½ï¿½ï¿½bï¿½N
     this.fallBlockArray = new Array();
-    //’â~ƒuƒƒbƒN
+    //ï¿½ï¿½ï¿½~ï¿½uï¿½ï¿½ï¿½bï¿½N
     this.blockArray = new Array();
     this.blockScale = new Vector2(this.screenSize.x / x, this.screenSize.y / y);
     for (var i = 0; i < x; i++) {
@@ -73,19 +73,19 @@ Stage.prototype.Initialize = function (x, y) {
     }
 }
 
-//ƒuƒƒbƒN’Ç‰ÁŠÖ” ˆÊ’u‚Í”z—ñ‚ÌˆÊ’u
+//ï¿½uï¿½ï¿½ï¿½bï¿½Nï¿½Ç‰ï¿½ï¿½Öï¿½ ï¿½Ê’uï¿½Í”zï¿½ï¿½ï¿½ÌˆÊ’u
 Stage.prototype.AddBlock = function(position,isCenter)
 {
-    //—‰ºƒuƒƒbƒN‚É“o˜^
+    //ï¿½ï¿½ï¿½ï¿½ï¿½uï¿½ï¿½ï¿½bï¿½Nï¿½É“oï¿½^
     this.fallBlockArray.push( new Block(this.ctx,
         position, this.blockScale, this.blockImageSrc, this, isCenter));
-    
+
 }
 
 Stage.prototype.CreateBlock = function () {
-    //ƒ‰ƒ“ƒ_ƒ€¶¬ 0~2
+    //ï¿½ï¿½ï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 0~2
     //var rand = Math.floor(Math.random() * 3);
-    
+
     //for (var x = 0; x < 7; x++)
     //{
     //    for(var y=0;y<7;y++)
@@ -104,7 +104,7 @@ Stage.prototype.CreateBlock = function () {
     if (this.IsGameOver())
     {
         run = false;
-        /*‚±‚±‚ÉƒQ[ƒ€ƒI[ƒo[ƒV[ƒ“ŠJn‚ğ“ü‚ê‚é*/
+        /*ï¿½ï¿½ï¿½ï¿½ï¿½ÉƒQï¿½[ï¿½ï¿½ï¿½Iï¿½[ï¿½oï¿½[ï¿½Vï¿½[ï¿½ï¿½ï¿½Jï¿½nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
     }
 
     player.SetBlock(this.fallBlockArray);
@@ -126,36 +126,37 @@ Stage.prototype.Update = function ()
         player.Fall();
     }
 }
-//ƒQ[ƒ€ƒI[ƒo[”»’è
+//ï¿½Qï¿½[ï¿½ï¿½ï¿½Iï¿½[ï¿½oï¿½[ï¿½ï¿½ï¿½ï¿½
 Stage.prototype.IsGameOver = function () {
     for(var i=0;i<this.fallBlockArray.length;i++)
     {
-        //¶¬ˆÊ’u‚ÉŠù‚ÉƒuƒƒbƒN‚ª‚ ‚éê‡
+        //ï¿½ï¿½ï¿½ï¿½ï¿½Ê’uï¿½ÉŠï¿½ï¿½Éƒuï¿½ï¿½ï¿½bï¿½Nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‡
         if(this.stageArray[this.fallBlockArray[i].arrayPos.x][this.fallBlockArray[i].arrayPos.y] == 1)
         {
+            location.href = "./result.html?";
             return true;
         }
     }
     for (var i = 0; i < this.fallBlockArray.length; i++)
     {
-        //—‰º’†ƒuƒƒbƒN‚Æ‚µ‚Ä“o˜^
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½uï¿½ï¿½ï¿½bï¿½Nï¿½Æ‚ï¿½ï¿½Ä“oï¿½^
         this.stageArray[this.fallBlockArray[i].arrayPos.x][this.fallBlockArray[i].arrayPos.y] = 2;
     }
 
     return false;
 
 }
-//—‰º‚ÌƒXƒNƒŠƒvƒg
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÌƒXï¿½Nï¿½ï¿½ï¿½vï¿½g
 Stage.prototype.FallFunc = function () {
     var isFall = false;
     for (var x = 0; x < this.stageSize.x; x++)
     {
         for (var y = 0; y < this.stageSize.y; y++)
         {
-            if (this.stageArray[x][y] == 2 && !this.IsFall(new Vector2(x, y)))//—‰ºƒuƒƒbƒN‚Ìê‡
+            if (this.stageArray[x][y] == 2 && !this.IsFall(new Vector2(x, y)))//ï¿½ï¿½ï¿½ï¿½ï¿½uï¿½ï¿½ï¿½bï¿½Nï¿½Ìê‡
             {
                 this.stageArray[x][y] = 1;
-                //’â~ƒuƒƒbƒN‚É“o˜^
+                //ï¿½ï¿½ï¿½~ï¿½uï¿½ï¿½ï¿½bï¿½Nï¿½É“oï¿½^
                 this.blockArray = this.blockArray.concat(this.fallBlockArray);
                 isFall = true;
                 break;
@@ -171,57 +172,57 @@ Stage.prototype.FallFunc = function () {
             for (var y = 0; y < this.stageSize.y; y++)
                 if (this.stageArray[x][y] == 2) this.stageArray[x][y] = 1;
         }
-        //—‰ºƒuƒƒbƒNƒNƒŠƒA
+        //ï¿½ï¿½ï¿½ï¿½ï¿½uï¿½ï¿½ï¿½bï¿½Nï¿½Nï¿½ï¿½ï¿½A
         this.fallBlockArray.length = 0;
-        //Á‹ˆ—
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         this.Delete();
-        //—‰ºƒuƒƒbƒN‚ª‚È‚­‚È‚Á‚½‚ç¶¬
+        //ï¿½ï¿½ï¿½ï¿½ï¿½uï¿½ï¿½ï¿½bï¿½Nï¿½ï¿½ï¿½È‚ï¿½ï¿½È‚ï¿½ï¿½ï¿½ï¿½ç¶ï¿½ï¿½
         if(this.fallBlockArray.length <=0) this.CreateBlock();
     }
 }
 
 Stage.prototype.IsFall = function (position)
 {
-    //ƒXƒe[ƒW‚Ì‰º’[‚Ìê‡ —‰º‚Å‚«‚È‚¢
+    //ï¿½Xï¿½eï¿½[ï¿½Wï¿½Ì‰ï¿½ï¿½[ï¿½Ìê‡ ï¿½ï¿½ï¿½ï¿½ï¿½Å‚ï¿½ï¿½È‚ï¿½
     if (position.y + 1 >= this.stageSize.y) return false;
-    //’â~ƒuƒƒbƒN‚ª‰º‚É‚ ‚éê‡false
+    //ï¿½ï¿½ï¿½~ï¿½uï¿½ï¿½ï¿½bï¿½Nï¿½ï¿½ï¿½ï¿½ï¿½É‚ï¿½ï¿½ï¿½ï¿½ê‡false
     return this.stageArray[position.x][position.y + 1] !=1;
 
 }
-//ƒuƒƒbƒN‚ªˆÚ“®‚Å‚«‚é‚©”»’è
+//ï¿½uï¿½ï¿½ï¿½bï¿½Nï¿½ï¿½ï¿½Ú“ï¿½ï¿½Å‚ï¿½ï¿½é‚©ï¿½ï¿½ï¿½ï¿½
 Stage.prototype.IsToBlock = function (position)
 {
-    //X²@ŠO‚Éo‚½‚ç
+    //Xï¿½ï¿½ï¿½@ï¿½Oï¿½Éoï¿½ï¿½ï¿½ï¿½
     if (position.x < 0 || position.x >= this.stageSize.x)
         return false;
-    //Y²
+    //Yï¿½ï¿½
     if (position.y < 0 || position.y >= this.stageSize.y) return false;
 
-    //ƒuƒƒbƒN‚ª‚ ‚é‚©”»’è
+    //ï¿½uï¿½ï¿½ï¿½bï¿½Nï¿½ï¿½ï¿½ï¿½ï¿½é‚©ï¿½ï¿½ï¿½ï¿½
     return this.stageArray[position.x][position.y] != 1;
 }
-//ˆê—ñ•À‚ñ‚Å‚¢‚½‚çƒuƒƒbƒNÁ‹
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½uï¿½ï¿½ï¿½bï¿½Nï¿½ï¿½ï¿½ï¿½
 Stage.prototype.Delete = function () {
     var deleteIndices = new Array();
-    var deleteRows = new Array();//íœs
-    //íœ”»’è
+    var deleteRows = new Array();//ï¿½íœï¿½s
+    //ï¿½íœï¿½ï¿½ï¿½ï¿½
     for (var y = 0; y < this.stageSize.y; y++) {
         var isDelete = true;
         for (var x = 0; x < this.stageSize.x; x++) {
-            //‚P‚Â‚Å‚à1(’â~ƒuƒƒbƒN)‚Å‚È‚¢ê‡Á‹‚µ‚È‚¢
+            //ï¿½Pï¿½Â‚Å‚ï¿½1(ï¿½ï¿½ï¿½~ï¿½uï¿½ï¿½ï¿½bï¿½N)ï¿½Å‚È‚ï¿½ï¿½ê‡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½
             if (this.stageArray[x][y] != 1) {
                 isDelete = false;
                 break;
             }
         }
-        //Á‹‚·‚éê‡
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‡
         if (isDelete) {
             deleteRows.push(y);
-            //”z—ñXV
+            //ï¿½zï¿½ï¿½ï¿½Xï¿½V
             for (var x = 0; x < this.stageSize.x; x++) {
                 this.stageArray[x][y] = 0;
             }
-            //íœ”Ô†Ši”[
+            //ï¿½íœï¿½Ôï¿½ï¿½iï¿½[
             for (var i = 0; i < this.blockArray.length; i++) {
                 if (this.blockArray[i].arrayPos.y == y)
                     deleteIndices.push(i);
@@ -230,13 +231,13 @@ Stage.prototype.Delete = function () {
 
     }
 
-    //ˆês‚àíœ‚µ‚È‚¢ê‡I—¹
+    //ï¿½ï¿½ï¿½sï¿½ï¿½ï¿½íœï¿½ï¿½ï¿½È‚ï¿½ï¿½ê‡ï¿½Iï¿½ï¿½
     if (deleteRows.length <= 0) return;
-    //ˆê”Ô‰º‚Ìs”Ô†‚ğæ“¾
+    //ï¿½ï¿½ï¿½Ô‰ï¿½ï¿½Ìsï¿½Ôï¿½ï¿½ï¿½ï¿½æ“¾
     var underDeleteRow = deleteRows[deleteRows.length - 1];
 
     for (var i = 0; i < this.blockArray.length; i++) {
-        //íœ—\’è‚ÌƒuƒƒbƒN‚ğœŠO
+        //ï¿½íœï¿½\ï¿½ï¿½ï¿½Ìƒuï¿½ï¿½ï¿½bï¿½Nï¿½ï¿½ï¿½ï¿½ï¿½O
         var isFind = true;
         for (var j = 0; j < deleteRows.length; j++) {
             if (deleteRows[j] == this.blockArray[i].arrayPos.y) {
@@ -246,24 +247,24 @@ Stage.prototype.Delete = function () {
         }
         if (!isFind) continue
 
-        //íœs‚Ìˆê”Ô‰º‚æ‚èã‚Ìê‡
+        //ï¿½íœï¿½sï¿½Ìˆï¿½ï¿½Ô‰ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ìê‡
         if (this.blockArray[i].arrayPos.y < underDeleteRow) {
-            //—‰ºƒuƒƒbƒN‚É’Ç‰Á
+            //ï¿½ï¿½ï¿½ï¿½ï¿½uï¿½ï¿½ï¿½bï¿½Nï¿½É’Ç‰ï¿½
             this.fallBlockArray.push(this.blockArray[i]);
-            //’â~ƒuƒƒbƒNíœ”z—ñ‚É’Ç‰Á
+            //ï¿½ï¿½ï¿½~ï¿½uï¿½ï¿½ï¿½bï¿½Nï¿½íœï¿½zï¿½ï¿½ï¿½É’Ç‰ï¿½
             deleteIndices.push(i);
-            //ƒXƒe[ƒW”z—ñ‚É”½‰f
+            //ï¿½Xï¿½eï¿½[ï¿½Wï¿½zï¿½ï¿½ï¿½É”ï¿½ï¿½f
             this.stageArray[this.blockArray[i].arrayPos.x][this.blockArray[i].arrayPos.y] = 2;
         }
     }
-    //íœ
-    //d•¡íœ
+    //ï¿½íœ
+    //ï¿½dï¿½ï¿½ï¿½íœ
     deleteIndices = deleteIndices.filter(function (v, i, s) {
     return s.indexOf(v) === i;
 });
-    //”z—ñ”Ô†‚ğ‹t‡‚É‚µ‚È‚¢‚Æ‚¢‚¯‚È‚¢‚Ì‚Å~‡ƒ\[ƒg
+    //ï¿½zï¿½ï¿½ï¿½Ôï¿½ï¿½ï¿½ï¿½tï¿½ï¿½ï¿½É‚ï¿½ï¿½È‚ï¿½ï¿½Æ‚ï¿½ï¿½ï¿½ï¿½È‚ï¿½ï¿½Ì‚Å~ï¿½ï¿½ï¿½\ï¿½[ï¿½g
     deleteIndices.sort(function (a, b) { return -(a - b); });
-    //”z—ñ‚©‚çíœ
+    //ï¿½zï¿½ñ‚©‚ï¿½ï¿½íœ
     for (var i = 0; i < deleteIndices.length; i++)
     {
         this.blockArray.splice(deleteIndices[i], 1);
@@ -271,10 +272,10 @@ Stage.prototype.Delete = function () {
 }
 
 Stage.prototype.Draw = function () {
-    //”wŒi‚Ì•`‰æ
+    //ï¿½wï¿½iï¿½Ì•`ï¿½ï¿½
     this.ctx.drawImage(this.bgImg, 0, 0);
 
-    //ƒuƒƒbƒN‚Ì•\¦
+    //ï¿½uï¿½ï¿½ï¿½bï¿½Nï¿½Ì•\ï¿½ï¿½
     for (var i = 0; i < this.fallBlockArray.length; i++)
         this.fallBlockArray[i].Draw();
     for (var i = 0; i < this.blockArray.length; i++)
@@ -283,17 +284,17 @@ Stage.prototype.Draw = function () {
     {
         for(var y=0;y<this.stageSize.y;y++)
         {
-            drawText(this.ctx, "#000000", this.blockScale.x, "MS PƒSƒVƒbƒN", x * this.blockScale.x, (y + 1) * this.blockScale.y, this.stageArray[x][y]);
+            drawText(this.ctx, "#000000", this.blockScale.x, "MS Pï¿½Sï¿½Vï¿½bï¿½N", x * this.blockScale.x, (y + 1) * this.blockScale.y, this.stageArray[x][y]);
         }
     }
 }
 Stage.prototype.MoveBlocks = function(blockArray,moveVec)
 {
     var nextPos = new Array();
-    //ˆÊ’u‚Ì‰Šú‰»
+    //ï¿½Ê’uï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½
     for (var i = 0; i < blockArray.length; i++) {
         this.stageArray[blockArray[i].arrayPos.x][blockArray[i].arrayPos.y] = 0;
-        //ˆÚ“®Œã‚ÌˆÊ’u‚ğŒvZ
+        //ï¿½Ú“ï¿½ï¿½ï¿½ï¿½ÌˆÊ’uï¿½ï¿½ï¿½vï¿½Z
         var next = new Vector2(blockArray[i].arrayPos.x + moveVec.x, blockArray[i].arrayPos.y + moveVec.y);
         blockArray[i].SetPos(next);
         nextPos.push(next);
@@ -303,17 +304,17 @@ Stage.prototype.MoveBlocks = function(blockArray,moveVec)
 
 }
 var KeyDown = function (event) {
-    //A‚ª‰Ÿ‚³‚ê‚½‚ç
+    //Aï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½ï¿½
     if (event.key == "a") {
-        //¶‚ÉˆÚ“®
+        //ï¿½ï¿½ï¿½ÉˆÚ“ï¿½
         player.Move(-1);
     }
     else if (event.key == "d") {
-        //‰E‚ÉˆÚ“®
+        //ï¿½Eï¿½ÉˆÚ“ï¿½
         player.Move(1);
     }
     else if (event.key == "Enter") {
-        //‰ñ“]
+        //ï¿½ï¿½ï¿½]
         player.Rotate();
     }
 }
