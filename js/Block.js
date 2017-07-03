@@ -12,7 +12,7 @@ var Block = function (ctx,position,size, blockImgSrc,manager,isCenter)
     //—Ž‰ºƒ^ƒCƒ}
     this.fallTimer = 0.0;
     //—Ž‰º‚Ü‚Å‚ÌŽžŠÔ
-    this.fallTime = 10.0;
+    this.fallTime = 12.0 - (2.0 * stageID);
 
     this.fallSpeed = size.y / this.fallTime;
     //’†‰›‚Ç‚¤‚©
