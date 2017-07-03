@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="utf-8">
+  <meta http-equiv="ROBOTS" content="index,follow">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <meta NAME="keywords" CONTENT="jQuery,Ajax,Excel,CSV読み込みサンプル">
+	<title>リザルト</title>
+	<link rel="stylesheet" href="css/resultscene.css">
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="js/jquery.csv.js"></script>
+	<!--
+  <script type="text/javascript" src="js/readcsv.js"></script>
+	-->
+</head>
+
+<body>
+  <noscript>
+      <p>JavaScriptがオフになっています。オンにして実行してください。</p>
+  </noscript>
+
+<!-- <audio src="./res/clap.mp3" autoplay loop></audio> -->
+
+<canvas id="bg" width="800" height="600"></canvas>
+
+<script>
+var ANIMATION_ID;
+$(document).ready(function()
+{
+	//ゲームの結果
+	var score = 160;
+	//ランキングをcsvから取得
+	var ranking = [1,1,1,1];
+
+	//描画オブジェクト
+	var canvas = $("#bg").get(0);
+	var ctx    = canvas.getContext('2d');
+	var bgImage = new Image();
+	var image = new Image();
+
+	//座標計算用
+	var x = 0;
+	var y = 0;
+	var step = 3;
+	var drawtxtX = [800,820,840];
+	var drawtxtY = [230,290,350];
+
+	LoadCSVResultScene();
+
+	image.src = "res/food.png";
+
+	bgImage.src = "res/bg.png";
+	bgImage.onload = function() {
+		 update();
+	};
+
+	function update(){
+		draw();
+		ANIMATION_ID = window.requestAnimationFrame(update);	//See. https://developer.mozilla.org/ja/docs/Web/API/Window/requestAnimationFrame
+																// コールバックの回数は、たいてい毎秒 60 回ですが、一般的に多くのブラウザーでは W3C の勧告に従って、ディスプレイのリフレッシュレートに合わせて行われます。
+	}
+
+	function draw(){
+		//alert( "aft:" + ranking[2]);
+		// Canvas全体をクリア
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+		ctx.fillRect(0 + x,0 + y,800 + x,600 + y);
+		ctx.drawImage(bgImage,x,y);
+
+
+		//背景座標移動
+		x -= 2;
+		y -= 2;
+		if(x < -800)
+		{
+			x = 0;
+			y = 0;
+		}
+		//文字座標移動
+		if(drawtxtX[0] > 200)
+		{
+			for(var i = 0; i<3;i++)
+			{
+				drawtxtX[i] -= 10;
+			}
+		}
+
+		//文字描画
+		DrawText(ctx,"#000000",56,"メイリオ",150,50, "スコア     " + score);
+		DrawText(ctx,"#000000",40,"メイリオ",250,160, "ランキング");
+		for(var i = 0; i<3;i++)
+		{
+			DrawText(ctx,"#000000",48,"メイリオ",drawtxtX[i],drawtxtY[i], (i + 1) + " 位         " + ranking[i] + "秒");
+			if(score == ranking[i])
+				DrawText(ctx,"#000000",20,"メイリオ",drawtxtX[i] + 400,drawtxtY[i] + 20, "NEW!!");
+		}
+		if(drawtxtX[0] <= 200)
+		{
+			DrawText(ctx,"#000000",32,"メイリオ",180,480, "スペースキーでタイトルに戻る");
+		}
+	}
+
+
+	function LoadCSVResultScene()
+	{
+		//csvファイルからランキングを読み込んで、配列に入れる
+		$(function(){
+		    $.get('ranking.csv',function(data){
+		        var csv = $.csv()(data);
+		        $(csv).each(function(index){
+		            if(this[0]){
+									ranking[index] = Number(this[0]);
+									alert(ranking);
+		            }
+		        })
+
+						//ゲームのスコアと比較して、配列を更新
+						ranking[3] = score;
+						ranking.sort(function(a,b){
+										if( a > b ) return -1;
+										if( a < b ) return 1;
+										return 0;
+						});
+		    })
+		})
+	}
+
+	function DrawText(ctx,color,size,font,x,y,word)
+	{
+		ctx.fillStyle = color;
+		ctx.font = size + "px '" + font + "'";
+		ctx.fillText(word, x, y + size);
+	}
+
+
+	//スペースキーを押したらタイトルへ戻る
+	var KEY_CODE_SPACE = 32;
+	$(window).keydown(function(e){
+		if(e.keyCode == KEY_CODE_SPACE){SceneEnd();}
+	});
+	function SceneEnd()
+	{
+		//データを次のファイルにエスケープして渡す。
+		var data = ranking;
+		location.href = "./rankingupdate.php?" + escape(data);
+	}
+
+
+});
+
+
+</script>
+</body>
+</html>
