@@ -49,14 +49,16 @@
     fclose($fp);
   }
 
+	$req_url = $_SERVER['REQUEST_URI'];
+	$spl_url = explode("?", $req_url);
+	$a = urldecode($spl_url[1]);
+	$b = explode(",", $a);
 
-  $f = 300;
-  $s = 200;
-  $t = 50;
+	$f = $b[0];
+  $s = $b[1];
+  $t = $b[2];
 
-	'<script type="text/javascript">document.write(screen.width);</script>';
   SaveCSV($f,$s,$t);
-
   ?>
 
   <noscript>
