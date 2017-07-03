@@ -46,6 +46,7 @@ $(document).ready(function()
 	var drawtxtX = [800,820,840];
 	var drawtxtY = [230,290,350];
 
+	DataReceive();
 	LoadCSVResultScene();
 
 	image.src = "res/food.png";
@@ -133,6 +134,24 @@ $(document).ready(function()
 		ctx.fillText(word, x, y + size);
 	}
 
+	//遷移時のデータ受け取り
+	function DataReceive(){
+		//?以降の文字を取得する
+		var data = location.search.substring(1, location.search.length);
+		//エスケープされた文字をアンエスケープする
+		data = unescape(data);
+		//受け渡し用にstring型にする
+		data = String(data);
+
+		//string型を受け取り、,で分割する
+		var arr = "";
+		arr += data;
+		arr = arr.split(",");
+
+		//数値に変換して取得
+		var s = parseInt(arr[0],10) / 60;
+		score = Math.floor(s);
+	}
 
 	//スペースキーを押したらタイトルへ戻る
 	var KEY_CODE_SPACE = 32;
