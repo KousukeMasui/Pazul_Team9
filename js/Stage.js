@@ -1,22 +1,22 @@
-//グローバル定義
+//・ｽO・ｽ・ｽ・ｽ[・ｽo・ｽ・ｽ・ｽ・ｽ・ｽ`
 var player;
-//Class定義
+//Class・ｽ・ｽ・ｽ`
 var Stage = function (ctx, x, y, backImageSrc,blockImageSrc,screenSize) {
     this.ctx = ctx;
-    //背景画像
+    //・ｽw・ｽi・ｽ鞫・
     this.bgImg = new Image();
     this.bgImg.src = backImageSrc;
-    //スクリーンサイズ
+    //・ｽX・ｽN・ｽ・ｽ・ｽ[・ｽ・ｽ・ｽT・ｽC・ｽY
     this.screenSize = screenSize;
     this.stageSize = new Vector2(x, y);
     this.Initialize(x, y);
-    //ブロックの画像
+    //・ｽu・ｽ・ｽ・ｽb・ｽN・ｽﾌ画像
     this.blockImageSrc = blockImageSrc;
-    //プレイヤーの生成
+    //・ｽv・ｽ・ｽ・ｽC・ｽ・ｽ・ｽ[・ｽﾌ撰ｿｽ・ｽ・ｽ
     player = new Player(this);
-    // キー入力の取得をイベントとして登録
+    // ・ｽL・ｽ[・ｽ・ｽ・ｽﾍの取得・ｽ・ｽ・ｽC・ｽx・ｽ・ｽ・ｽg・ｽﾆゑｿｽ・ｽﾄ登・ｽ^
     document.addEventListener('keydown', KeyDown, true);
-    //csvを読み込む 読み込みが終わるまで待機
+    //csv・ｽ・ｽ・ｽﾇみ搾ｿｽ・ｽ・ｽ ・ｽﾇみ搾ｿｽ・ｽﾝゑｿｽ・ｽI・ｽ・ｽ・ｽ・ｽ・ｽﾜで待機
     g_isPouse = true;
     this.csv = new CSV_Data(" ");
     this.createBlocks = new Array();
@@ -59,9 +59,9 @@ Stage.prototype.Initialize = function (x, y) {
         for (var j = 0; j < y; j++)
             this.stageArray[i][j] = 0;
     }
-    //落下ブロック
+    //・ｽ・ｽ・ｽ・ｽ・ｽu・ｽ・ｽ・ｽb・ｽN
     this.fallBlockArray = new Array();
-    //停止ブロック
+    //・ｽ・ｽ・ｽ~・ｽu・ｽ・ｽ・ｽb・ｽN
     this.blockArray = new Array();
     this.blockScale = new Vector2(this.screenSize.x / x, this.screenSize.y / y);
     for (var i = 0; i < x; i++) {
@@ -71,13 +71,13 @@ Stage.prototype.Initialize = function (x, y) {
     }
 }
 
-//ブロック追加関数 位置は配列の位置
+//・ｽu・ｽ・ｽ・ｽb・ｽN・ｽﾇ会ｿｽ・ｽﾖ撰ｿｽ ・ｽﾊ置・ｽﾍ配・ｽ・ｽ・ｽﾌ位置
 Stage.prototype.AddBlock = function(position,isCenter)
 {
-    //落下ブロックに登録
+    //・ｽ・ｽ・ｽ・ｽ・ｽu・ｽ・ｽ・ｽb・ｽN・ｽﾉ登・ｽ^
     this.fallBlockArray.push( new Block(this.ctx,
         position, this.blockScale, this.blockImageSrc, this, isCenter));
-    
+
 }
 
 Stage.prototype.CreateBlock = function () {
@@ -126,36 +126,37 @@ Stage.prototype.Update = function ()
         player.Fall();
     }
 }
-//ゲームオーバー判定
+//・ｽQ・ｽ[・ｽ・ｽ・ｽI・ｽ[・ｽo・ｽ[・ｽ・ｽ・ｽ・ｽ
 Stage.prototype.IsGameOver = function () {
     for(var i=0;i<this.fallBlockArray.length;i++)
     {
-        //生成位置に既にブロックがある場合
+        //・ｽ・ｽ・ｽ・ｽ・ｽﾊ置・ｽﾉ奇ｿｽ・ｽﾉブ・ｽ・ｽ・ｽb・ｽN・ｽ・ｽ・ｽ・ｽ・ｽ・ｽ・ｽ鼾・
         if(this.stageArray[this.fallBlockArray[i].arrayPos.x][this.fallBlockArray[i].arrayPos.y] == 1)
         {
+            location.href = "./result.html?";
             return true;
         }
     }
     for (var i = 0; i < this.fallBlockArray.length; i++)
     {
-        //落下中ブロックとして登録
+        //・ｽ・ｽ・ｽ・ｽ・ｽ・ｽ・ｽu・ｽ・ｽ・ｽb・ｽN・ｽﾆゑｿｽ・ｽﾄ登・ｽ^
         this.stageArray[this.fallBlockArray[i].arrayPos.x][this.fallBlockArray[i].arrayPos.y] = 2;
     }
 
     return false;
 
 }
-//落下時のスクリプト
+//・ｽ・ｽ・ｽ・ｽ・ｽ・ｽ・ｽﾌス・ｽN・ｽ・ｽ・ｽv・ｽg
 Stage.prototype.FallFunc = function () {
     var isFall = false;
     for (var x = 0; x < this.stageSize.x; x++)
     {
         for (var y = 0; y < this.stageSize.y; y++)
         {
-            if (this.stageArray[x][y] == 2 && !this.IsFall(new Vector2(x, y)))//落下ブロックの場合
+            if (this.stageArray[x][y] == 2 && !this.IsFall(new Vector2(x, y)))//・ｽ・ｽ・ｽ・ｽ・ｽu・ｽ・ｽ・ｽb・ｽN・ｽﾌ場合
             {
                 this.stageArray[x][y] = 1;
-                //停止ブロックに登録
+                //・ｽ・ｽ・ｽ~・ｽu・ｽ・ｽ・ｽb・ｽN・ｽﾉ登・ｽ^
                 this.blockArray = this.blockArray.concat(this.fallBlockArray);
                 isFall = true;
                 break;
@@ -171,57 +172,57 @@ Stage.prototype.FallFunc = function () {
             for (var y = 0; y < this.stageSize.y; y++)
                 if (this.stageArray[x][y] == 2) this.stageArray[x][y] = 1;
         }
-        //落下ブロッククリア
+        //・ｽ・ｽ・ｽ・ｽ・ｽu・ｽ・ｽ・ｽb・ｽN・ｽN・ｽ・ｽ・ｽA
         this.fallBlockArray.length = 0;
-        //消去処理
+        //・ｽ・ｽ・ｽ・ｽ・ｽ・ｽ・ｽ・ｽ
         this.Delete();
-        //落下ブロックがなくなったら生成
+        //・ｽ・ｽ・ｽ・ｽ・ｽu・ｽ・ｽ・ｽb・ｽN・ｽ・ｽ・ｽﾈゑｿｽ・ｽﾈゑｿｽ・ｽ・ｽ・ｽ逅ｶ・ｽ・ｽ
         if(this.fallBlockArray.length <=0) this.CreateBlock();
     }
 }
 
 Stage.prototype.IsFall = function (position)
 {
-    //ステージの下端の場合 落下できない
+    //・ｽX・ｽe・ｽ[・ｽW・ｽﾌ会ｿｽ・ｽ[・ｽﾌ場合 ・ｽ・ｽ・ｽ・ｽ・ｽﾅゑｿｽ・ｽﾈゑｿｽ
     if (position.y + 1 >= this.stageSize.y) return false;
-    //停止ブロックが下にある場合false
+    //・ｽ・ｽ・ｽ~・ｽu・ｽ・ｽ・ｽb・ｽN・ｽ・ｽ・ｽ・ｽ・ｽﾉゑｿｽ・ｽ・ｽ・ｽ鼾㌶alse
     return this.stageArray[position.x][position.y + 1] !=1;
 
 }
-//ブロックが移動できるか判定
+//・ｽu・ｽ・ｽ・ｽb・ｽN・ｽ・ｽ・ｽﾚ難ｿｽ・ｽﾅゑｿｽ・ｽ驍ｩ・ｽ・ｽ・ｽ・ｽ
 Stage.prototype.IsToBlock = function (position)
 {
-    //X軸　外に出たら
+    //X・ｽ・ｽ・ｽ@・ｽO・ｽﾉ出・ｽ・ｽ・ｽ・ｽ
     if (position.x < 0 || position.x >= this.stageSize.x)
         return false;
-    //Y軸
+    //Y・ｽ・ｽ
     if (position.y < 0 || position.y >= this.stageSize.y) return false;
 
-    //ブロックがあるか判定
+    //・ｽu・ｽ・ｽ・ｽb・ｽN・ｽ・ｽ・ｽ・ｽ・ｽ驍ｩ・ｽ・ｽ・ｽ・ｽ
     return this.stageArray[position.x][position.y] != 1;
 }
-//一列並んでいたらブロック消去
+//・ｽ・ｽ・ｽ・ｽ・ｽ・ｽ・ｽ・ｽ・ｽﾅゑｿｽ・ｽ・ｽ・ｽ・ｽ・ｽu・ｽ・ｽ・ｽb・ｽN・ｽ・ｽ・ｽ・ｽ
 Stage.prototype.Delete = function () {
     var deleteIndices = new Array();
-    var deleteRows = new Array();//削除行
-    //削除判定
+    var deleteRows = new Array();//・ｽ尞懶ｿｽs
+    //・ｽ尞懶ｿｽ・ｽ・ｽ・ｽ
     for (var y = 0; y < this.stageSize.y; y++) {
         var isDelete = true;
         for (var x = 0; x < this.stageSize.x; x++) {
-            //１つでも1(停止ブロック)でない場合消去しない
+            //・ｽP・ｽﾂでゑｿｽ1(・ｽ・ｽ・ｽ~・ｽu・ｽ・ｽ・ｽb・ｽN)・ｽﾅなゑｿｽ・ｽ鼾・ｿｽ・ｽ・ｽ・ｽ・ｽ・ｽ・ｽﾈゑｿｽ
             if (this.stageArray[x][y] != 1) {
                 isDelete = false;
                 break;
             }
         }
-        //消去する場合
+        //・ｽ・ｽ・ｽ・ｽ・ｽ・ｽ・ｽ・ｽ・ｽ鼾・
         if (isDelete) {
             deleteRows.push(y);
-            //配列更新
+            //・ｽz・ｽ・ｽ・ｽX・ｽV
             for (var x = 0; x < this.stageSize.x; x++) {
                 this.stageArray[x][y] = 0;
             }
-            //削除番号格納
+            //・ｽ尞懶ｿｽﾔ搾ｿｽ・ｽi・ｽ[
             for (var i = 0; i < this.blockArray.length; i++) {
                 if (this.blockArray[i].arrayPos.y == y)
                     deleteIndices.push(i);
@@ -230,13 +231,13 @@ Stage.prototype.Delete = function () {
 
     }
 
-    //一行も削除しない場合終了
+    //・ｽ・ｽ・ｽs・ｽ・ｽ・ｽ尞懶ｿｽ・ｽ・ｽﾈゑｿｽ・ｽ鼾・ｿｽI・ｽ・ｽ
     if (deleteRows.length <= 0) return;
-    //一番下の行番号を取得
+    //・ｽ・ｽ・ｽﾔ会ｿｽ・ｽﾌ行・ｽﾔ搾ｿｽ・ｽ・ｽ・ｽ謫ｾ
     var underDeleteRow = deleteRows[deleteRows.length - 1];
 
     for (var i = 0; i < this.blockArray.length; i++) {
-        //削除予定のブロックを除外
+        //・ｽ尞懶ｿｽ\・ｽ・ｽ・ｽﾌブ・ｽ・ｽ・ｽb・ｽN・ｽ・ｽ・ｽ・ｽ・ｽO
         var isFind = true;
         for (var j = 0; j < deleteRows.length; j++) {
             if (deleteRows[j] == this.blockArray[i].arrayPos.y) {
@@ -246,24 +247,24 @@ Stage.prototype.Delete = function () {
         }
         if (!isFind) continue
 
-        //削除行の一番下より上の場合
+        //・ｽ尞懶ｿｽs・ｽﾌ茨ｿｽ・ｽﾔ会ｿｽ・ｽ・ｽ・ｽ・ｽ・ｽ・ｽ・ｽﾌ場合
         if (this.blockArray[i].arrayPos.y < underDeleteRow) {
-            //落下ブロックに追加
+            //・ｽ・ｽ・ｽ・ｽ・ｽu・ｽ・ｽ・ｽb・ｽN・ｽﾉ追会ｿｽ
             this.fallBlockArray.push(this.blockArray[i]);
-            //停止ブロック削除配列に追加
+            //・ｽ・ｽ・ｽ~・ｽu・ｽ・ｽ・ｽb・ｽN・ｽ尞懶ｿｽz・ｽ・ｽ・ｽﾉ追会ｿｽ
             deleteIndices.push(i);
-            //ステージ配列に反映
+            //・ｽX・ｽe・ｽ[・ｽW・ｽz・ｽ・ｽ・ｽﾉ費ｿｽ・ｽf
             this.stageArray[this.blockArray[i].arrayPos.x][this.blockArray[i].arrayPos.y] = 2;
         }
     }
-    //削除
-    //重複削除
+    //・ｽ尞・
+    //・ｽd・ｽ・ｽ・ｽ尞・
     deleteIndices = deleteIndices.filter(function (v, i, s) {
     return s.indexOf(v) === i;
 });
-    //配列番号を逆順にしないといけないので降順ソート
+    //・ｽz・ｽ・ｽ・ｽﾔ搾ｿｽ・ｽ・ｽ・ｽt・ｽ・ｽ・ｽﾉゑｿｽ・ｽﾈゑｿｽ・ｽﾆゑｿｽ・ｽ・ｽ・ｽﾈゑｿｽ・ｽﾌで降・ｽ・ｽ・ｽ\・ｽ[・ｽg
     deleteIndices.sort(function (a, b) { return -(a - b); });
-    //配列から削除
+    //・ｽz・ｽｩゑｿｽ・ｽ尞・
     for (var i = 0; i < deleteIndices.length; i++)
     {
         this.blockArray.splice(deleteIndices[i], 1);
@@ -271,10 +272,10 @@ Stage.prototype.Delete = function () {
 }
 
 Stage.prototype.Draw = function () {
-    //背景の描画
+    //・ｽw・ｽi・ｽﾌ描・ｽ・ｽ
     this.ctx.drawImage(this.bgImg, 0, 0);
 
-    //ブロックの表示
+    //・ｽu・ｽ・ｽ・ｽb・ｽN・ｽﾌ表・ｽ・ｽ
     for (var i = 0; i < this.fallBlockArray.length; i++)
         this.fallBlockArray[i].Draw();
     for (var i = 0; i < this.blockArray.length; i++)
@@ -283,17 +284,17 @@ Stage.prototype.Draw = function () {
     {
         for(var y=0;y<this.stageSize.y;y++)
         {
-            drawText(this.ctx, "#000000", this.blockScale.x, "MS Pゴシック", x * this.blockScale.x, (y + 1) * this.blockScale.y, this.stageArray[x][y]);
+            drawText(this.ctx, "#000000", this.blockScale.x, "MS P・ｽS・ｽV・ｽb・ｽN", x * this.blockScale.x, (y + 1) * this.blockScale.y, this.stageArray[x][y]);
         }
     }
 }
 Stage.prototype.MoveBlocks = function(blockArray,moveVec)
 {
     var nextPos = new Array();
-    //位置の初期化
+    //・ｽﾊ置・ｽﾌ擾ｿｽ・ｽ・ｽ・ｽ・ｽ
     for (var i = 0; i < blockArray.length; i++) {
         this.stageArray[blockArray[i].arrayPos.x][blockArray[i].arrayPos.y] = 0;
-        //移動後の位置を計算
+        //・ｽﾚ難ｿｽ・ｽ・ｽ・ｽﾌ位置・ｽ・ｽ・ｽv・ｽZ
         var next = new Vector2(blockArray[i].arrayPos.x + moveVec.x, blockArray[i].arrayPos.y + moveVec.y);
         blockArray[i].SetPos(next);
         nextPos.push(next);
@@ -303,17 +304,17 @@ Stage.prototype.MoveBlocks = function(blockArray,moveVec)
 
 }
 var KeyDown = function (event) {
-    //Aが押されたら
+    //A・ｽ・ｽ・ｽ・ｽ・ｽ・ｽ・ｽ黷ｽ・ｽ・ｽ
     if (event.key == "a") {
-        //左に移動
+        //・ｽ・ｽ・ｽﾉ移難ｿｽ
         player.Move(-1);
     }
     else if (event.key == "d") {
-        //右に移動
+        //・ｽE・ｽﾉ移難ｿｽ
         player.Move(1);
     }
     else if (event.key == "Enter") {
-        //回転
+        //・ｽ・ｽ・ｽ]
         player.Rotate();
     }
 }
