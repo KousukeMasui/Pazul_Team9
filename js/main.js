@@ -45,7 +45,6 @@ var Initialize = function () {
 
     //数値に変換して取得
     var s = parseInt(arr[0], 10);
-    alert(s);
     var bgSrc ="res/", blSrc="res/";
     switch (s)
     {
@@ -66,7 +65,7 @@ var Initialize = function () {
             blSrc += "food.png";
             break;
     }
-
+    
     this.stage = new Stage(ctx, 10, 10, bgSrc, blSrc, new Vector2(800, 600));
 }
 
@@ -93,7 +92,6 @@ window.onload = function(){
 
         Update();
         if (!run) {
-            alert("game_over");
             ctx.drawImage(gameOverImage, screenCanvas.width / 2 - 200, screenCanvas.height);
         }
         Draw();

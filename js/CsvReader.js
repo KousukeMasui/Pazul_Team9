@@ -7,7 +7,6 @@ var CSVReader = function (fileName, func) {
     // レスポンスが返ってきたらconvertCSVtoArray()を呼ぶ
     req.onload = function () {
         this.dataArray = ConvertCSVtoArray(req.responseText); // 渡されるのは読み込んだCSVデータ
-        alert(this.dataArray);
         func(new CSV_Data(this.dataArray));
     }
 }
