@@ -12,6 +12,8 @@ var fps = 1000 / 30;
 var mouse = new Vector2(0,0);
 var ctx; // canvas2d コンテキスト格納用
 var gameOverImage;//ゲームオーバー文字
+//現在のステージ
+var stageID;
 //初期化
 var Initialize = function () {
     // canvasの取得
@@ -51,14 +53,17 @@ var Initialize = function () {
         case 1:
             bgSrc += "background-cave.jpg";
             blSrc += "dia/dia.png";
+            stageID = 1;
             break;
         case 2:
             bgSrc += "background-dia.jpg";
             blSrc += "diamond/diamond.png";
+            stageID = 2;
             break;
         case 3:
             bgSrc += "background-hielo.jpg";
             blSrc += "hielo/iconhielo.png";
+            stageID = 3;
             break;
         default:
             bgSrc += "Background.png";
