@@ -3,12 +3,25 @@
 <head>
 	<meta charset="utf-8">
 	<title>enchantjs 1</title>
+
+    <style>
+        canvas {
+            border: 1px solid gray;
+        }
+    </style>
 </head>
 <body>
+    <canvas id="screen"></canvas>
+    <p id="info"></p>
 
-<script src="enchantjs/enchant.min.js"></script>
 <script src="js/jquery.min.js"></script>
-<script>
+    <script src="js/base/Vector2.js"></script>
+    <script src="js/base/Actor.js"></script>
+    <script src="js/Player.js"></script>
+<script src="js/Stage.js"></script>
+    <script src="js/Block.js"></script>
+<script src="js/main.js"></script>
+<script>/*
 $(document).ready(function(){
 	enchant();							// initialize
 	var game = new Core(600, 500);		// game stage
@@ -19,13 +32,12 @@ $(document).ready(function(){
 		var scene = new Scene();
 
 		//Sprite準備
-		var tantan = new Sprite(194, 129);
-		tantan.image = game.assets['res/food.png'];
+		var tantan = new Stage(10, 10);
 		scene.addChild(tantan);
 		
 		//フレーム毎の処理をここに記述
 		game.addEventListener('enterframe', function() {
-			tantan.x += 1;
+		    //tantan.Update();
 		});
 
 		//シーンを反映
@@ -33,7 +45,7 @@ $(document).ready(function(){
 	};
 
     game.start(); // start your game!
-});
+});*/
 </script>
 </body>
 </html>
